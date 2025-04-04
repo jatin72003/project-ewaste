@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Waste Crisis - Our Digital Footprint</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0a6c75;
+            --secondary: #2eb086;
+            --accent: #f0a202;
+            --dark: #333;
+            --light: #f8f9fa;
+            --danger: #e74c3c;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--light);
+        }
+        
+        .navbar {
+            background-color: rgba(10, 108, 117, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 1rem;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            min-height: 100vh;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-text {
+            color: white;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .hero-img {
+            max-width: 100%;
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.1);
+            animation: float 10s linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-800px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-bottom: 5px solid var(--accent);
+            height: 100%;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stats-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .impact-section {
+            background-color: #f8f9fa;
+            padding: 5rem 0;
+        }
+        
+        .impact-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .impact-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .impact-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .solution-section {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 5rem 0;
+        }
+        
+        .solution-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .solution-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--secondary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            background-color: white;
+            border: 4px solid var(--accent);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid white;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent white;
+        }
+        
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid white;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+        
+        .right::after {
+            left: -13px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-year {
+            background-color: var(--accent);
+            color: white;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .cta-section {
+            background-color: var(--dark);
+            color: white;
+            padding: 5rem 0;
+        }
+        
+        .cta-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .cta-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #d88c02;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(240, 162, 2, 0.4);
+        }
+        
+        .btn-outline-light {
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            color: var(--accent);
+        }
+        
+        .social-icon {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .counter-box {
+            margin: 20px 0;
+            display: flex;
+        }
+        
+        .counter-digit {
+            background-color: var(--primary);
+            color: white;
+            font-size: 2rem;
+            width: 50px;
+            height: 60px;
+            margin-right: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-bar {
+            background-color: var(--secondary);
+        }
+        
+        .text-primary {
+            color: var(--primary) !important;
+        }
+        
+        .text-secondary {
+            color: var(--secondary) !important;
+        }
+        
+        .text-accent {
+            color: var(--accent) !important;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary) !important;
+        }
+        
+        .bg-secondary {
+            background-color: var(--secondary) !important;
+        }
+        
+        .bg-accent {
+            background-color: var(--accent) !important;
+        }
+        
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 99;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        #back-to-top.show {
+            opacity: 1;
+        }
+        
+        #back-to-top:hover {
+            background-color: #d88c02;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 991.98px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-container {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-container::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-recycle me-2"></i>
+                <span>E-Waste Crisis</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#statistics">Statistics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#impact">Impact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#solutions">Solutions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#timeline">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#take-action">Take Action</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero d-flex align-items-center">
+        <div class="floating-icons">
+            <!-- Floating electronic waste icons -->
+            <i class="fas fa-mobile-alt floating-icon" style="top: 20%; left: 10%; font-size: 2rem; animation-duration: 15s;"></i>
+            <i class="fas fa-laptop floating-icon" style="top: 40%; left: 20%; font-size: 2.5rem; animation-duration: 18s;"></i>
+            <i class="fas fa-tv floating-icon" style="top: 30%; left: 80%; font-size: 3rem; animation-duration: 13s;"></i>
+            <i class="fas fa-keyboard floating-icon" style="top: 60%; left: 65%; font-size: 2rem; animation-duration: 16s;"></i>
+            <i class="fas fa-headphones floating-icon" style="top: 70%; left: 40%; font-size: 1.5rem; animation-duration: 14s;"></i>
+            <i class="fas fa-microchip floating-icon" style="top: 50%; left: 15%; font-size: 1.8rem; animation-duration: 17s;"></i>
+            <i class="fas fa-mouse floating-icon" style="top: 80%; left: 30%; font-size: 1.7rem; animation-duration: 19s;"></i>
+            <i class="fas fa-camera floating-icon" style="top: 35%; left: 75%; font-size: 2.2rem; animation-duration: 15s;"></i>
+            <i class="fas fa-calculator floating-icon" style="top: 65%; left: 85%; font-size: 1.9rem; animation-duration: 14s;"></i>
+            <i class="fas fa-print floating-icon" style="top: 25%; left: 45%; font-size: 2.3rem; animation-duration: 16s;"></i>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-text animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 fw-bold mb-4">The Growing Crisis of E-Waste</h1>
+                    <p class="lead mb-4">Electronic waste is the fastest growing waste stream in the world, with millions of tons discarded annually. Join us in understanding the problem and finding sustainable solutions.</p>
+                    <div class="counter-box">
+                        <div class="counter-digit">5</div>
+                        <div class="counter-digit">7</div>
+                        <div class="counter-digit">.</div>
+                        <div class="counter-digit">4</div>
+                        <div class="ms-3 d-flex align-items-center">
+                            <span class="h4 mb-0">Million Tons</span>
+                        </div>
+                    </div>
+                    <p class="mb-4">of e-waste generated globally in 2023</p>
+                    <div class="d-flex">
+                        <a href="#take-action" class="btn btn-primary me-3">Take Action</a>
+                        <a href="#impact" class="btn btn-outline-light">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0 animate__animated animate__fadeInRight">
+                    <img src="/api/placeholder/600/400" alt="E-waste illustration" class="hero-img img-fluid rounded-3 shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Statistics Section -->
+    <section id="statistics" class="py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-6 text-center">
+                    <h2 class="text-primary fw-bold mb-4">Alarming Statistics</h2>
+                    <p class="lead">The numbers behind the global e-waste crisis paint a concerning picture of our digital consumption.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="stats-card animate__animated animate__fadeInUp">
+                        <div class="stats-number">57.4M</div>
+                        <h4>Tons Yearly</h4>
+                        <p>Global e-waste generation in 2023, expected to reach 74.7 million tons by 2030.</p>
+                        <div class="progress mt-3">
+                            <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="stats-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                        <div class="stats-number">17%</div>
+                        <h4>Recycled</h4>
+                        <p>Only a small fraction of all e-waste is documented to be properly collected and recycled.</p>
+                        <div class="progress mt-3">
+                            <div class="progress-bar" role="progressbar" style="width: 17%;" aria-valuenow="17" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="stats-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                        <div class="stats-number">$62B</div>
+                        <h4>Value Lost</h4>
+                        <p>Annual value of raw materials in global e-waste, including gold, copper, and iron.</p>
+                        <div class="progress mt-3">
+                            <div class="progress-bar" role="progressbar" style="width: 62%;" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="stats-card animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                        <div class="stats-number">7.3kg</div>
+                        <h4>Per Person</h4>
+                        <p>Average e-waste generated per person globally, with much higher rates in developed countries.</p>
+                        <div class="progress mt-3">
+                            <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Impact Section -->
+    <section id="impact" class="impact-section">
+        <div class="container py-5">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-6 text-center">
+                    <h2 class="text-primary fw-bold mb-4">Environmental & Human Impact</h2>
+                    <p class="lead">E-waste affects both our planet and its people in profound ways.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="impact-card animate__animated animate__fadeInUp">
+                        <div class="p-4">
+                            <div class="impact-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <h3>Environmental Contamination</h3>
+                            <p>When improperly disposed of, e-waste releases toxic substances including lead, mercury, and cadmium into soil and water systems.</p>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> Soil degradation</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> Water pollution</li>
+                                <li><i class="fas fa-check-circle text-secondary me-2"></i> Air quality reduction</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="impact-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                        <div class="p-4">
+                            <div class="impact-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <h3>Health Hazards</h3>
+                            <p>Workers in informal e-waste recycling often face severe health risks from exposure to hazardous materials without proper protection.</p>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> Respiratory issues</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> Neurological damage</li>
+                                <li><i class="fas fa-check-circle text-secondary me-2"></i> Increased cancer risk</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="impact-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                        <div class="p-4">
+                            <div class="impact-icon">
+                                <i class="fas fa-cloud-rain"></i>
+                            </div>
+                            <h3>Climate Change</h3>
+                            <p>The production and disposal of electronics contribute significantly to greenhouse gas emissions and climate change.</p>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> High carbon footprint</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> Resource depletion</li>
+                                <li><i class="fas fa-check-circle text-secondary me-2"></i> Energy waste</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mt-4">
+                    <div class="impact-card animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                        <div class="p-4">
+                            <div class="impact-icon">
+                                <i class="fas fa-child"></i>
+                            </div>
+                            <h3>Social Inequality</h3>
+                            <p>E-waste often flows from wealthy nations to developing countries, creating environmental justice concerns.</p>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> Child labor</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> Inequitable health impacts</li>
+                                <li><i class="fas fa-check-circle text-secondary me-2"></i> Economic exploitation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mt-4">
+                    <div class="impact-card animate__animated animate__fadeInUp" style="animation-delay: 0.8s;">
+                        <div class="p-4">
+                            <div class="impact-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <h3>Resource Waste</h3>
+                            <p>Discarded electronics contain valuable materials that could be recovered through proper recycling.</p>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> Rare earth elements</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> Precious metals</li>
+                                <li><i class="fas fa-check-circle text-secondary me-2"></i> Reusable components</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mt-4">
+                    <div class="impact-card animate__animated animate__fadeInUp" style="animation-delay: 1s;">
+                        <div class="p-4">
+                            <div class="impact-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Data Security</h3>
+                            <p>Improper disposal of electronics can lead to data breaches and identity theft from recoverable information.</p>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> Personal information theft</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-secondary me-2"></i> Corporate data exposure</li>
+                                <li><i class="fas fa-check-circle text-secondary me-2"></i> Privacy violations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solutions Section -->
+    <section id="solutions" class="solution-section">
+        <div class="container py-5">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-6 text-center">
+                    <h2 class="fw-bold mb-4">Sustainable Solutions</h2>
+                    <p class="lead">Addressing the e-waste crisis requires a comprehensive approach involving multiple stakeholders.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="solution-card animate__animated animate__fadeInUp">
+                        <i class="fas fa-recycle fa-3x mb-4"></i>
+                        <h3>Circular Economy</h3>
+                        <p>Design electronics for durability, repair, reuse, and eventual recycling to keep materials in use longer.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="solution-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                        <i class="fas fa-tools fa-3x mb-4"></i>
+                        <h3>Right to Repair</h3>
+                        <p>Support legislation giving consumers and independent repair shops access to parts and repair information.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="solution-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                        <i class="fas fa-leaf fa-3x mb-4"></i>
+                        <h3>Eco-Design</h3>
+                        <p>Create electronics with fewer hazardous materials and standardized components for easier recycling.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="solution-card animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                        <i class="fas fa-balance-scale fa-3x mb-4"></i>
+                        <h3>Extended Producer Responsibility</h3>
+                        <p>Hold manufacturers financially responsible for the end-of-life management of their products.</p>
+                    </div>
